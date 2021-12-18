@@ -1,0 +1,43 @@
+name: A1 Code
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # install and cache dependencies
+      - name: CMake
+        uses: actions/cache@v1.0.3
+        id: CMake
+        with:
+          path: "~/CMake"
+          key: CMake
+      - name: Install CMake
+        env:
+          CACHE_HIT: ${{steps.CMake.outputs.cache-hit}}
+        run: |
+          if [[ "$CACHE_HIT" == 'true' ]]; then
+            sudo cp --force --recursive ~/CMake/* /
+          else
+            sudo apt-get update && sudo apt-get install -yq cmake
+            mkdir -p ~/CMake
+            for dep in cmake; do
+                dpkg -L $dep | while IFS= read -r f; do if test -f $f; then echo $f; fi; done | xargs cp --parents --target-directory ~/CMake/
+            done
+          fi
+      # build project
+      - name: mkdir
+        run: mkdir build && cd build
+      - name: cmake build
+        run: cmake ..
+      - name: cmake make
+        run: make
+        env:
+          MAKEFLAGS: "-j4"
+      # run tests
+      - name: run test 1
+        run: a1_test
