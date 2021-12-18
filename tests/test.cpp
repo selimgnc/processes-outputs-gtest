@@ -89,7 +89,7 @@ TEST(processIdbyNames, sum_zero) {
 
     std::ifstream a("test.txt");
     // std::ifstream a("out1.txt");
-    std::ifstream b("/home/eren-keskin-pc/Desktop/upwork/A1 code/build/out31.txt");
+    std::ifstream b("out2.txt");
 
     std::string genfile((std::istreambuf_iterator<char>(a)), std::istreambuf_iterator<char>());
     std::string genfile2((std::istreambuf_iterator<char>(b)), std::istreambuf_iterator<char>());
