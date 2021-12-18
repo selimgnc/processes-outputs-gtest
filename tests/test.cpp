@@ -8,7 +8,7 @@
 
 const char* PID_DIR = "/proc";
 const char* CMDLINE_FILENAME = "/cmdline";
-const std::string filename = "/home/eren-keskin-pc/Desktop/upwork/process_output/processes-outputs-gtest/test.txt";
+const std::string filename = "test.txt";
 static constexpr uint16_t BUF_SIZE = 1024;
 std::ofstream file;
 
@@ -87,8 +87,8 @@ TEST(processIdbyNames, sum_zero) {
 
     processesPids();
 
-    std::ifstream a("/home/eren-keskin-pc/Desktop/upwork/process_output/processes-outputs-gtest/test.txt");
-    // std::ifstream a("/home/eren-keskin-pc/Desktop/upwork/process_output/processes-outputs-gtest/out1.txt");
+    std::ifstream a("test.txt");
+    // std::ifstream a("out1.txt");
     std::ifstream b("/home/eren-keskin-pc/Desktop/upwork/A1 code/build/out31.txt");
 
     std::string genfile((std::istreambuf_iterator<char>(a)), std::istreambuf_iterator<char>());
